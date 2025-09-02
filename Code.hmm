@@ -33,7 +33,7 @@ Code "Spindash Stuff" in "Physics" by "Lex"
 
     if (!IsConfigInitialised)
     {
-        var modsQuery = HMM.FindModsByName("High Speed Style");
+        var modsQuery = HMM.FindModsByName("Frontiers 2D D-Pad Support");
 
         if (modsQuery.Count == 1)
             {
