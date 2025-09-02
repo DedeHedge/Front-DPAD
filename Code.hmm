@@ -1,30 +1,62 @@
-Patch "Code" in "Weather" by "Hyper" does 
-/*
-Forces the weather to Rainy on supported islands.
 
-Supported islands;
-- Kronos
-- Chaos
-- Rhea
-- Ouranos
-*/
+Code "Spindash Stuff" in "Physics" by "Lex" 
 //
-    #lib "Memory"
+    #include "Reflection" noemit
+
+    #lib "Player"
+    #lib "BlackboardStatus"
+    #lib "Reflection"
+    #lib "Lua"
+    #lib "HMM"
+	#lib "INI"
+
+    #load "System.Numerics.dll"
+
+    using System;
+    using System.Numerics;
+
+    static bool IsConfigInitialised = false;
+	static int DPadType = 0;
+
+    static bool isWind = false;
+    static bool isCyber = false;
 //
 {
-    void NOP(long addr)
-        => WriteProtected<byte>(addr, 0xEB, 0x38);
 
-    /* 0x1401EE652 */
-    long callerFuncAddr = ScanSignature
-    (
-        "\xE8\xCC\xCC\xCC\xCC\x48\x8B\xCB\x8B\xF0\xE8\xCC\xCC\xCC\xCC\x8B\xF8",
-        "x????xxxxxx????xx"
-    );
+    float currentSpeed = Player.Kinematics.GetMagnitude();
+    var state = Player.State.GetCurrentStateID<Sonic.StateID>();
 
-    /* 0x1401EE3ED */
-    NOP(Memory.ReadCall(callerFuncAddr) + 0x2D);
+    if (Player.GetPlayerType() != Player.PlayerType.Sonic)
+        return;
 
-    /* 0x1401EE4DD */
-    NOP(Memory.ReadCall(callerFuncAddr + 0x0A) + 0x2D);
+    Lua.Call("LoadLevel", "warship01")
+
+    if (!IsConfigInitialised)
+    {
+        var modsQuery = HMM.FindModsByName("High Speed Style");
+
+        if (modsQuery.Count == 1)
+            {
+            string modConfigIniPath = System.IO.Path.Combine(modsQuery[0].Path, "config.ini");
+            var ini = INI.Read(modConfigIniPath);
+
+            DPadType = INI.Parse<int>(ini["Main"]["DPadType "], DPadType );
+            }
+
+        IsConfigInitialised = true;
+    }
+
+    if (DPadType == 1)
+    {
+    
+    }
+    
+    
+
+    if (DPadType == 2)
+    {
+    
+    }
+
+    
 }

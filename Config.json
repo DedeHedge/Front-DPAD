@@ -5,12 +5,12 @@
          "DisplayName": "D-Pad Options",
          "Elements": [
       {
-               "Name": "D-PadType",
-               "DisplayName": "Speed Effects:",
+               "Name": "DPadType",
+               "DisplayName": "DPad Support Type:",
                "Description": [
                   "Switch Between What D-Pad Option Fits You Based On Physics Mod In Use."
                ],
-               "Type": "D-PadType",
+               "Type": "DPadType",
                "MinValue": 0,
                "MaxValue": 99,
                "DefaultValue": "1"
@@ -20,7 +20,7 @@
       }
    ],
    "Enums": {
-		"D-PadType": [
+		"DPadType": [
          {
             "DisplayName": "Base D-Pad Support",
             "Value": "1",
