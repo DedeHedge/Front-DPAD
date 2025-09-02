@@ -1,0 +1,43 @@
+{
+  "Groups": [
+    {
+      "Name": "Main",
+      "DisplayName": "Select D-Pad Option",
+      "Elements": 
+         [
+			{
+               "Name":"IncludeDir0",
+               "DisplayName":"Choose.",
+               "Description":[
+                  "Changes which D-Pad Style is selected"
+               ],
+               "Type":"CostumeEnum",
+               "MinValue":null,
+               "MaxValue":null,
+               "DefaultValue":"raw"
+            }
+			
+         ]
+      }
+   ],
+   "Enums":{
+    "CostumeEnum": [
+        {
+            "DisplayName": "Base D-Pad Support",
+            "Value": "Code.hmm",
+            "Description": [
+                "Basic D-Pad Support in 2D Segments of Frontiers, Disables D-Pad Inputs when not in a 2D Segment."
+            ]
+        },
+        {
+            "DisplayName": "Classic Style Spindash D-Pad Support",
+            "Value": "ClassicSpindash.hmm",
+            "Description": [
+                "Support for spindash mods that have spindashes similar to other 2D Sonic Games."
+            ]
+      }
+
+    ]
+  },
+  "IniFile": "mod.ini"
+}
