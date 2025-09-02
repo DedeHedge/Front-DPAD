@@ -1,7 +1,10 @@
-Code "ClassicSpindash" by "Trepe" does "Nothing"
+Code "Always Sunset" in "Time" by "Hyper" does "Forces the time to always be 8:45 PM on the islands." 
 //
-
+    #lib "Lua"
 //
 {
-	// This Code literally does nothing lol
+    Lua.SetPrintPreviousError(false);
+    Lua.Call("SetTime", 20.0f, 45.0f);
+    Lua.Call("SetTimePause", true);
+    Lua.SetPrintPreviousError(true);
 }

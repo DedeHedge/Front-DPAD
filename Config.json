@@ -1,43 +1,41 @@
 {
-  "Groups": [
-    {
-      "Name": "Main",
-      "DisplayName": "Select D-Pad Option",
-      "Elements": 
-         [
-			{
-               "Name":"IncludeDir0",
-               "DisplayName":"Choose.",
-               "Description":[
-                  "Changes which D-Pad Style is selected"
+   "Groups": [
+      {
+         "Name": "Main",
+         "DisplayName": "D-Pad Options",
+         "Elements": [
+      {
+               "Name": "D-PadType",
+               "DisplayName": "Speed Effects:",
+               "Description": [
+                  "Switch Between What D-Pad Option Fits You Based On Physics Mod In Use."
                ],
-               "Type":"CostumeEnum",
-               "MinValue":null,
-               "MaxValue":null,
-               "DefaultValue":"raw"
-            }
-			
+               "Type": "D-PadType",
+               "MinValue": 0,
+               "MaxValue": 99,
+               "DefaultValue": "1"
+ 
+      }                                                             
          ]
       }
    ],
-   "Enums":{
-    "CostumeEnum": [
-        {
+   "Enums": {
+		"D-PadType": [
+         {
             "DisplayName": "Base D-Pad Support",
-            "Type": "Code.hmm",
+            "Value": "1",
             "Description": [
-                "Basic D-Pad Support in 2D Segments of Frontiers, Disables D-Pad Inputs when not in a 2D Segment."
+               "Basic D-Pad Support in 2D Segments of Frontiers."
             ]
-        },
-        {
+         },
+	 {
             "DisplayName": "Classic Style Spindash D-Pad Support",
-            "Type": "ClassicSpindash.hmm",
+            "Value": "2",
             "Description": [
-                "Support for spindash mods that have spindashes similar to other 2D Sonic Games."
+               "Support for spindash mods that allow for Spindashing by holding down and spamming space."
             ]
-      }
-
-    ]
-  },
-  "IniFile": "mod.ini"
+         }
+      ]
+   },
+   "IniFile": "config.ini" 
 }
