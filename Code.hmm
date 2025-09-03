@@ -11,11 +11,14 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
     #load "System.Numerics.dll"
 
-    using System;
+    using System.Collections.Generic;
     using System.Numerics;
 
     static bool IsConfigInitialised = false;
 	static int DPadType = 0;
+    static bool UseLeftTiltLeftJoystick = false; // set to true to enable left joystick
+    static bool UseRightTiltLeftJoystick = false; // set to true to enable right joystick
+    static bool UseDownTiltLeftJoystick = false; // set to true to enable south joystick
 
     [Flags]
     public enum Buttons : ushort
@@ -36,10 +39,25 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         Y              = 0x8000
     }
 
+    public struct XINPUT_GAMEPAD
+    {
+        public short sThumbLX; // Left thumbstick X-axis (-32768 to 32767)
+        public short sThumbLY; // Left thumbstick Y-axis (-32768 to 32767)
+        public short sThumbRX; // Right thumbstick X-axis (-32768 to 32767)
+        public short sThumbRY; // Right thumbstick Y-axis (-32768 to 32767)
+        public byte bLeftTrigger; // Left trigger (0-255)
+        public byte bRightTrigger; // Right trigger (0-255)
+    }
+
+    Vector2 v = Vector2.Zero;
 //
 {
 
+    
+
     var state = Player.State.GetCurrentStateID<Sonic.StateID>();
+
+    XINPUT_GAMEPAD gamepadState = new XINPUT_GAMEPAD();
 
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
         return;
@@ -60,6 +78,25 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         IsConfigInitialised = true;
     }
 
+    if(UseLeftTiltLeftJoystick == true) 
+    {
+        
+        //gamepadState.sThumbLX = -32767; //
+         v = new Vector2(gamepadState.sThumbLX / -32767.0f);
+    }
+
+    if(UseRightTiltLeftJoystick == true) 
+    {
+        
+        //gamepadState.sThumbLX = 32767; //
+        v = new Vector2(gamepadState.sThumbLX / 32767.0f);
+    }
+
+    if(UseDownTiltLeftJoystick == true) 
+    {
+
+    }
+
     if (DPadType == 1)
     {
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
@@ -74,12 +111,16 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
-
+            UseRightTiltLeftJoystick = true;
+       } else {
+            UseRightTiltLeftJoystick = false;
        }
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
-
+            UseLeftTiltLeftJoystick = true;
+       } else {
+            UseLeftTiltLeftJoystick = false;
        }
     }
     
@@ -87,7 +128,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
     if (DPadType == 2)
     {
-        if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
+         if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
        {
 
        }
@@ -99,15 +140,20 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
-
+            UseRightTiltLeftJoystick = true;
+       } else {
+            UseRightTiltLeftJoystick = false;
        }
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
-
+            UseLeftTiltLeftJoystick = true;
+       } else {
+            UseLeftTiltLeftJoystick = false;
        }
     }
 
+    
     
 }
 
