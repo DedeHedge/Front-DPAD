@@ -1,14 +1,13 @@
 
-Code "Spindash Stuff" in "Physics" by "Lex" 
+Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 //
-    #include "Reflection" noemit
 
     #lib "Player"
     #lib "BlackboardStatus"
-    #lib "Reflection"
-    #lib "Lua"
     #lib "HMM"
 	#lib "INI"
+    #lib "XInput"
+
 
     #load "System.Numerics.dll"
 
@@ -18,18 +17,33 @@ Code "Spindash Stuff" in "Physics" by "Lex"
     static bool IsConfigInitialised = false;
 	static int DPadType = 0;
 
-    static bool isWind = false;
-    static bool isCyber = false;
+    [Flags]
+    public enum Buttons : ushort
+    {
+        DPAD_UP        = 0x0001,
+        DPAD_DOWN      = 0x0002,
+        DPAD_LEFT      = 0x0004,
+        DPAD_RIGHT     = 0x0008,
+        START          = 0x0010,
+        BACK           = 0x0020,
+        LEFT_THUMB     = 0x0040,
+        RIGHT_THUMB    = 0x0080,
+        LEFT_SHOULDER  = 0x0100,
+        RIGHT_SHOULDER = 0x0200,
+        A              = 0x1000,
+        B              = 0x2000,
+        X              = 0x4000,
+        Y              = 0x8000
+    }
+
 //
 {
 
-    float currentSpeed = Player.Kinematics.GetMagnitude();
     var state = Player.State.GetCurrentStateID<Sonic.StateID>();
 
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
         return;
 
-    Lua.Call("LoadLevel", "warship01")
 
     if (!IsConfigInitialised)
     {
@@ -40,7 +54,7 @@ Code "Spindash Stuff" in "Physics" by "Lex"
             string modConfigIniPath = System.IO.Path.Combine(modsQuery[0].Path, "config.ini");
             var ini = INI.Read(modConfigIniPath);
 
-            DPadType = INI.Parse<int>(ini["Main"]["DPadType "], DPadType );
+            DPadType = INI.Parse<int>(ini["Main"]["DPadType"], DPadType );
             }
 
         IsConfigInitialised = true;
@@ -48,15 +62,53 @@ Code "Spindash Stuff" in "Physics" by "Lex"
 
     if (DPadType == 1)
     {
-    
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_DOWN))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
+       {
+
+       }
     }
     
     
 
     if (DPadType == 2)
     {
-    
+        if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_DOWN))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
+       {
+
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
+       {
+
+       }
     }
 
     
 }
+
+
