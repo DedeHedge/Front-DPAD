@@ -50,6 +50,8 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
     }
 
     Vector2 v = Vector2.Zero;
+
+    #define PRINT(in_str) Console.WriteLine(in_str)
 //
 {
 
@@ -112,6 +114,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
             UseRightTiltLeftJoystick = true;
+            PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
        } else {
             UseRightTiltLeftJoystick = false;
        }
@@ -119,13 +122,14 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
             UseLeftTiltLeftJoystick = true;
+            PRINT("DPAD LEFT BUTTON DOWN");
        } else {
             UseLeftTiltLeftJoystick = false;
        }
     }
     
     
-
+    //Classic Spindash Support DPAD
     if (DPadType == 2)
     {
          if (XInput.IsButtonDown(XInput.Buttons.DPAD_UP))
