@@ -13,6 +13,8 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
     using System.Collections.Generic;
     using System.Numerics;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
 
     static bool IsConfigInitialised = false;
 	static int DPadType = 0;
@@ -49,6 +51,36 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         public byte bRightTrigger; // Right trigger (0-255)
     }
 
+    public static class KeyboardSimulator
+    {
+        // Define the keybd_event function from user32.dll
+        [DllImport("user32.dll")]
+        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
+
+        // Constants for keybd_event flags
+        private const int KEYEVENTF_EXTENDEDKEY = 0x0001;
+        private const int KEYEVENTF_KEYUP = 0x0002;
+
+        public static void SimulateKeyPress(byte virtualKeyCode)
+        {
+            // Simulate key down
+            keybd_event(virtualKeyCode, 0, 0, 0); 
+            // Simulate key up
+            keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0); 
+        }
+
+        public static void SimulateKeyDown(byte virtualKeyCode)
+        {
+            keybd_event(virtualKeyCode, 0, 0, 0);
+        }
+
+        public static void SimulateKeyUp(byte virtualKeyCode)
+        {
+            keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0);
+        }
+    }
+
+
     Vector2 v = Vector2.Zero;
 
     #define PRINT(in_str) Console.WriteLine(in_str)
@@ -84,14 +116,16 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
     {
         
         //gamepadState.sThumbLX = -32767; //
-         v = new Vector2(gamepadState.sThumbLX / -32767.0f);
+        //v = new Vector2(gamepadState.sThumbLX / -32767.0f);
+         KeyboardSimulator.SimulateKeyPress((byte)Keys.A)
     }
 
     if(UseRightTiltLeftJoystick == true) 
     {
         
         //gamepadState.sThumbLX = 32767; //
-        v = new Vector2(gamepadState.sThumbLX / 32767.0f);
+        //v = new Vector2(gamepadState.sThumbLX / 32767.0f);
+        KeyboardSimulator.SimulateKeyDown((byte)Keys.D)
     }
 
     if(UseDownTiltLeftJoystick == true) 
@@ -115,6 +149,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
        {
             UseRightTiltLeftJoystick = true;
             PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
+            
        } else {
             UseRightTiltLeftJoystick = false;
        }
