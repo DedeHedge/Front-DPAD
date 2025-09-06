@@ -1,4 +1,3 @@
-
 Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 //
 
@@ -13,14 +12,10 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
     using System.Collections.Generic;
     using System.Numerics;
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
+    
 
     static bool IsConfigInitialised = false;
 	static int DPadType = 0;
-    static bool UseLeftTiltLeftJoystick = false; // set to true to enable left joystick
-    static bool UseRightTiltLeftJoystick = false; // set to true to enable right joystick
-    static bool UseDownTiltLeftJoystick = false; // set to true to enable south joystick
 
     #define PRINT(in_str) Console.WriteLine(in_str)
 //
@@ -51,27 +46,6 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         IsConfigInitialised = true;
     }
 
-    if(UseLeftTiltLeftJoystick == true) 
-    {
-        
-         PRINT("DPAD LEFT BUTTON DOWN");
-    } else {
-        
-    }
-
-    if(UseRightTiltLeftJoystick == true) 
-    {
-        
-        
-        PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
-    } else {
-
-    }
-
-    if(UseDownTiltLeftJoystick == true) 
-    {
-
-    }
 
     if (DPadType == 1)
     {
@@ -82,25 +56,21 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_DOWN))
        {
-
+           
        }
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
-            UseRightTiltLeftJoystick = true;
+            PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
             
             
-       } else {
-            UseRightTiltLeftJoystick = false;
        }
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
-            UseLeftTiltLeftJoystick = true;
+            PRINT("DPAD LEFT BUTTON DOWN");
             
-       } else {
-            UseLeftTiltLeftJoystick = false;
-       }
+       } 
     }
     
     
@@ -119,17 +89,13 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
-            UseRightTiltLeftJoystick = true;
-       } else {
-            UseRightTiltLeftJoystick = false;
-       }
+           
+       } 
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
-            UseLeftTiltLeftJoystick = true;
-       } else {
-            UseLeftTiltLeftJoystick = false;
-       }
+            
+       } 
     }
 }
 
