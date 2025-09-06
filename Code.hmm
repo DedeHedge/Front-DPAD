@@ -66,7 +66,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
             // Simulate key down
             keybd_event(virtualKeyCode, 0, 0, 0); 
             // Simulate key up
-            keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0); 
+            //keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0); 
         }
 
         public static void SimulateKeyDown(byte virtualKeyCode)
@@ -118,6 +118,9 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         //gamepadState.sThumbLX = -32767; //
         //v = new Vector2(gamepadState.sThumbLX / -32767.0f);
          KeyboardSimulator.SimulateKeyPress((byte)Keys.A)
+         PRINT("DPAD LEFT BUTTON DOWN");
+    } else {
+        KeyboardSimulator.SimulateKeyDown((byte)Keys.A)
     }
 
     if(UseRightTiltLeftJoystick == true) 
@@ -125,6 +128,10 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         
         //gamepadState.sThumbLX = 32767; //
         //v = new Vector2(gamepadState.sThumbLX / 32767.0f);
+        KeyboardSimulator.SimulateKeyDown((byte)Keys.D)
+
+        PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
+    } else {
         KeyboardSimulator.SimulateKeyDown((byte)Keys.D)
     }
 
@@ -148,7 +155,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
             UseRightTiltLeftJoystick = true;
-            PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
+            
             
        } else {
             UseRightTiltLeftJoystick = false;
@@ -157,7 +164,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
        {
             UseLeftTiltLeftJoystick = true;
-            PRINT("DPAD LEFT BUTTON DOWN");
+            
        } else {
             UseLeftTiltLeftJoystick = false;
        }
