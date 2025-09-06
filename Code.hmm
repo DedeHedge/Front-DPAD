@@ -22,67 +22,6 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
     static bool UseRightTiltLeftJoystick = false; // set to true to enable right joystick
     static bool UseDownTiltLeftJoystick = false; // set to true to enable south joystick
 
-    [Flags]
-    public enum Buttons : ushort
-    {
-        DPAD_UP        = 0x0001,
-        DPAD_DOWN      = 0x0002,
-        DPAD_LEFT      = 0x0004,
-        DPAD_RIGHT     = 0x0008,
-        START          = 0x0010,
-        BACK           = 0x0020,
-        LEFT_THUMB     = 0x0040,
-        RIGHT_THUMB    = 0x0080,
-        LEFT_SHOULDER  = 0x0100,
-        RIGHT_SHOULDER = 0x0200,
-        A              = 0x1000,
-        B              = 0x2000,
-        X              = 0x4000,
-        Y              = 0x8000
-    }
-
-    public struct XINPUT_GAMEPAD
-    {
-        public short sThumbLX; // Left thumbstick X-axis (-32768 to 32767)
-        public short sThumbLY; // Left thumbstick Y-axis (-32768 to 32767)
-        public short sThumbRX; // Right thumbstick X-axis (-32768 to 32767)
-        public short sThumbRY; // Right thumbstick Y-axis (-32768 to 32767)
-        public byte bLeftTrigger; // Left trigger (0-255)
-        public byte bRightTrigger; // Right trigger (0-255)
-    }
-
-    public static class KeyboardSimulator
-    {
-        // Define the keybd_event function from user32.dll
-        [DllImport("user32.dll")]
-        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
-
-        // Constants for keybd_event flags
-        private const int KEYEVENTF_EXTENDEDKEY = 0x0001;
-        private const int KEYEVENTF_KEYUP = 0x0002;
-
-        public static void SimulateKeyPress(byte virtualKeyCode)
-        {
-            // Simulate key down
-            keybd_event(virtualKeyCode, 0, 0, 0); 
-            // Simulate key up
-            //keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0); 
-        }
-
-        public static void SimulateKeyDown(byte virtualKeyCode)
-        {
-            keybd_event(virtualKeyCode, 0, 0, 0);
-        }
-
-        public static void SimulateKeyUp(byte virtualKeyCode)
-        {
-            keybd_event(virtualKeyCode, 0, KEYEVENTF_KEYUP, 0);
-        }
-    }
-
-
-    Vector2 v = Vector2.Zero;
-
     #define PRINT(in_str) Console.WriteLine(in_str)
 //
 {
@@ -91,7 +30,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
     var state = Player.State.GetCurrentStateID<Sonic.StateID>();
 
-    XINPUT_GAMEPAD gamepadState = new XINPUT_GAMEPAD();
+   
 
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
         return;
@@ -115,24 +54,18 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
     if(UseLeftTiltLeftJoystick == true) 
     {
         
-        //gamepadState.sThumbLX = -32767; //
-        //v = new Vector2(gamepadState.sThumbLX / -32767.0f);
-         KeyboardSimulator.SimulateKeyPress((byte)Keys.A)
          PRINT("DPAD LEFT BUTTON DOWN");
     } else {
-        KeyboardSimulator.SimulateKeyDown((byte)Keys.A)
+        
     }
 
     if(UseRightTiltLeftJoystick == true) 
     {
         
-        //gamepadState.sThumbLX = 32767; //
-        //v = new Vector2(gamepadState.sThumbLX / 32767.0f);
-        KeyboardSimulator.SimulateKeyDown((byte)Keys.D)
-
+        
         PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
     } else {
-        KeyboardSimulator.SimulateKeyDown((byte)Keys.D)
+
     }
 
     if(UseDownTiltLeftJoystick == true) 
@@ -198,9 +131,6 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
             UseLeftTiltLeftJoystick = false;
        }
     }
-
-    
-    
 }
 
 
