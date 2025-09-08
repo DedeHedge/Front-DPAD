@@ -33,6 +33,20 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateSquat);
         SquatPressed = true;
        } 
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
+       {
+            //PRINT("DPAD RIGHT BUTTON DOWN"); // Writes 1 to the console.
+            
+            Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateRun);
+       }
+
+       if (XInput.IsButtonDown(XInput.Buttons.DPAD_LEFT))
+       {
+            //PRINT("DPAD LEFT BUTTON DOWN");
+            
+            Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateRun);
+       } 
        
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
         return;
