@@ -17,6 +17,8 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
     static bool IsConfigInitialised = false;
 	static int DPadType = 0;
     static bool SquatPressed = false;
+    static bool WasSet = false;
+    static bool WasReleased = false;
 
 
     static List<Sonic.StateID> stompState = new() {
@@ -29,10 +31,19 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 {
     if (XInput.IsButtonDown(XInput.Buttons.DPAD_DOWN) && Player.Status.IsGrounded())
        {
-           
         Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateSquat);
+        Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateStandRoot, Sonic.StateID.StateSquat);   
         SquatPressed = true;
-       } 
+        WasSet = false;
+        WasReleased = true;
+       } else {
+        if(WasReleased)
+        {
+                Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateStandRoot, Sonic.StateID.StateStandRoot); 
+                WasReleased = false;
+        }
+        
+       }
 
        if (XInput.IsButtonDown(XInput.Buttons.DPAD_RIGHT))
        {
