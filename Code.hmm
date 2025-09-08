@@ -58,6 +58,11 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
             
             Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateRun);
        } 
+
+        if (Player.Input.IsPressed(Player.InputActionType.PlayerJump) && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSquat && Player.Status.IsGrounded())
+       {
+            
+       } 
        
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
         return;
