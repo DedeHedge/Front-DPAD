@@ -37,6 +37,14 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
         WasSet = false;
         WasReleased = true;
        } else {
+
+         if (XInput.IsButtonDown(XInput.Buttons.DPAD_DOWN) && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateRun)
+       {
+          Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateRun, Sonic.StateID.StateDropDash);
+          Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateSquat, Sonic.StateID.StateDropDash);
+       }
+
+
         if(WasReleased)
         {
                 Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateStandRoot, Sonic.StateID.StateStandRoot); 
@@ -61,7 +69,7 @@ Code "D-Pad In 2D Sections" by "DevDede" and "Placed5th"
 
         if (Player.Input.IsPressed(Player.InputActionType.PlayerJump) && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSquat && Player.Status.IsGrounded())
        {
-            
+            //Insert Spindash Code Here.
        } 
        
     if (Player.GetPlayerType() != Player.PlayerType.Sonic)
